@@ -79,46 +79,71 @@ void funkcia_s(char upraveny_text[])
 		}
 		printf("%c", upraveny_text[i]);
 	}
+	printf("\n");
 
 }
 
-void funkcia_d(char povodny_text[], int pocitadlo){
-	int cislo, counter=0, pomocny_counter;
-	
-	while (1)
+void funkcia_d(char povodny_text[], int pocitadlo) 
+{
+	int pocet_pismen = 0; 
+	int pocet_slov = 0; 
+	int cislo; 
+
+	scanf_s("%d", &cislo);
+	if (cislo >= 1 && cislo <= 100) 
 	{
-		int tmp;
-		tmp = scanf("%d", &cislo);
-		if (cislo >= 1 && cislo <= 100)
+		for (int i = 0; i <= pocitadlo; i++)
 		{
-			for (int i = 0; i < pocitadlo; i++)
+			pocet_pismen++;
+			if (povodny_text[i] == ' ' || povodny_text[i] == '\0')
 			{
-				counter++;
-				if (povodny_text[i] == ' ' && cislo == counter)
+				if ((pocet_pismen-1) == cislo) 
 				{
-					pomocny_counter = i - cislo;
-					for (int j = 0; j < cislo; j++)
+					pocet_slov++;
+					for (int j = 0; j < cislo ; j++)
 					{
-						printf("%c", povodny_text[pomocny_counter]);
-						pomocny_counter++;
+						printf("%c", povodny_text[i - cislo + j]);
 					}
+					printf("\n");
 				}
+				pocet_pismen = 0;
 			}
-			break;
+			
 		}
-		else
+		if (pocet_slov==0)
 		{
-			printf("Zadajte ine cislo.");
-			int tmp1;
-			tmp1 = scanf("%d", &cislo);
+			printf("Neexistuje slovo s danym poctom znakov.\n");
 		}
 	}
-	
-	
+
+	else
+	{
+		printf("Zadajte ine cislo.\n");
+		scanf_s("%d", &cislo);
+	}
+
 }
+
+void funkcia_c(char upraveny_text[], int pocitadlo) {
+	int sifrovacie_cislo;
+	scanf("%d", &sifrovacie_cislo);
+
+	if (sifrovacie_cislo >= 1 && sifrovacie_cislo <= 25)
+	{
+		for (int i = 0; i <= pocitadlo; i++)
+		{
+			upraveny_text[pocitadlo] = upraveny_text[pocitadlo - sifrovacie_cislo];
+			printf("%c", upraveny_text[pocitadlo - sifrovacie_cislo]);
+		}
+		
+	}
+	else printf("Zadajte cislo v rozmadzi od 1 do 25 vratane.");
+}
+
 int main()
 {
 	int pocitadlo = 0;
+	//pocitadlo urcuje pocet znakov v poli
 	char povodny_text[MAX] = "", upraveny_text[MAX] = "";
 	char vstup;
 	
