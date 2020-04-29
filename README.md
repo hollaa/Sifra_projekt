@@ -1,2 +1,2 @@
 # Sifra_projekt
-Prvy skolsky projekt na ZPRPR
+Jednoduche zadanie do skoly naprogramovane v C.
